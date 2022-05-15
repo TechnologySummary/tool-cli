@@ -1,0 +1,17 @@
+{
+  "name": "tool-cli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "jaylen.chan <jaylen.chan@hotmail.com>",
+  "license": "MIT",
+  "bin": {
+    "tool": "./bin/index.js"
+  },
+  "workspaces": [
+    "core",
+    "lib"
+  ],
+  "dependencies": {
+    "@tool-cli/core": "file: core"
+  }
+}
