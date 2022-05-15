@@ -8,6 +8,7 @@ const userHome = require('user-home')
 const minimist = require('minimist')
 const dotenv = require('dotenv')
 const log = require('@tool-cli/log')
+const npm = require('@tool-cli/npm')
 const pkg = require('../package.json')
 const { LOWEST_NODE_VERSION, DEFAULT_CLI_HOME } = require('./const')
 
@@ -20,6 +21,7 @@ class Cli {
       this.checkUserHome()
       this.checkInputArgs()
       this.checkEnv()
+      this.checkGlobalUpdate()
     } catch (e) {
       log.error(e.message)
     }
@@ -72,7 +74,6 @@ class Cli {
     }
 
     log.level = process.env.LOG_LEVEL
-    log.verbose('debug', 'test debug')
   }
 
   checkEnv() {
@@ -95,6 +96,19 @@ class Cli {
      * 因此，我们需要给这个地方添加默认的环境变量，防止用户没配置这个环境变量就直接拿来使用
      */
     log.verbose('环境变量', process.env.CLI_HOME_PATH)
+  }
+
+  async checkGlobalUpdate() {
+    const { name: pkgName, version: pkgVersion } = pkg
+    const latestVersion = await npm.getNpmSemverVersions(pkgVersion, '@imooc-cli/core')
+
+    if (latestVersion && semver.gt(latestVersion, pkgVersion)) {
+      log.warn(
+        colors.yellow(`请手动更新${pkgName}，当前版本：${pkgVersion}，最新版本：${latestVersion}
+          更新命令：npm install -g ${pkgName}
+      `)
+      )
+    }
   }
 
   createFile(filePath) {

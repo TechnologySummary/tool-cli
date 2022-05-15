@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@tool-cli/log": "file:../../../../utils/log",
+    "@tool-cli/get-npm-info": "file:../../../../utils/get-npm-info",
     "colors": "^1.4.0",
     "dotenv": "^16.0.1",
     "minimist": "^1.2.5",
