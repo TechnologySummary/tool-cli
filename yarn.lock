@@ -6,9 +6,10 @@
   "resolved" "file:core/cli"
   "version" "1.0.0"
   dependencies:
-    "@tool-cli/get-npm-info" "file:../../../../utils/get-npm-info"
-    "@tool-cli/log" "file:../../../../utils/log"
+    "@tool-cli/log" "file:../../utils/log"
+    "@tool-cli/npm" "file:../../utils/npm"
     "colors" "^1.4.0"
+    "commander" "^6.2.1"
     "dotenv" "^16.0.1"
     "minimist" "^1.2.5"
     "path-exists" "^4.0.0"
@@ -16,10 +17,7 @@
     "semver" "^7.3.7"
     "user-home" "^2.0.0"
 
-"@tool-cli/get-npm-info@file:../../../../utils/get-npm-info":
-  "resolved" "file:../../utils/get-npm-info"
-
-"@tool-cli/log@file:../../../../utils/log":
+"@tool-cli/log@file:../../utils/log":
   "resolved" "file:utils/log"
   "version" "1.0.0"
   dependencies:
@@ -31,13 +29,23 @@
   dependencies:
     "npmlog" "^6.0.2"
 
+"@tool-cli/npm@file:../../utils/npm":
+  "resolved" "file:utils/npm"
+  "version" "1.0.0"
+  dependencies:
+    "axios" "^0.27.2"
+    "colors" "^1.4.0"
+    "semver" "^7.3.7"
+    "url-join" "^4.0.1"
+
 "@tool-cli/npm@file:/Users/jaylen/tool-cli/utils/npm":
   "resolved" "file:utils/npm"
   "version" "1.0.0"
   dependencies:
     "axios" "^0.27.2"
+    "colors" "^1.4.0"
     "semver" "^7.3.7"
-    "url-join" "^5.0.0"
+    "url-join" "^4.0.1"
 
 "ansi-regex@^2.0.0":
   "integrity" "sha1-w7M6te42DYbg5ijwRorn7yfWVN8="
@@ -107,6 +115,11 @@
   "version" "1.0.8"
   dependencies:
     "delayed-stream" "~1.0.0"
+
+"commander@^6.1.0":
+  "integrity" "sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA=="
+  "resolved" "https://registry.npmmirror.com/commander/-/commander-6.2.1.tgz"
+  "version" "6.2.1"
 
 "console-control-strings@^1.1.0":
   "integrity" "sha1-PXz0Rk22RG6mRL9LOVB/mFEAjo4="

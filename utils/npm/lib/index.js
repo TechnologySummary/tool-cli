@@ -1,6 +1,7 @@
 const axios = require('axios')
 const urlJoin = require('url-join')
 const semver = require('semver')
+const colors = require('colors')
 
 class Npm {
   getNpmInfo(moduleName, registry = this.getDefaultRegistry()) {
@@ -14,7 +15,7 @@ class Npm {
         if (res.status !== 200) return null
         return res.data
       })
-      .catch((err) => Promise.reject(err))
+      .catch((err) => colors.red(err.message))
   }
 
   getDefaultRegistry(isOriginal = false) {
@@ -32,11 +33,15 @@ class Npm {
   }
 
   async getNpmVersions(moduleName, registry) {
-    const data = await this.getNpmInfo(moduleName, registry)
-
-    if (!data) return []
-
-    return Reflect.ownKeys(data.versions)
+    let data
+    try {
+      data = await this.getNpmInfo(moduleName, registry)
+    } finally {
+      if (/Request failed with status code 404/.test(data)) {
+        return []
+      }
+      return Reflect.ownKeys(data.versions)
+    }
   }
 
   getSemverVersions(baseVersion, versions) {

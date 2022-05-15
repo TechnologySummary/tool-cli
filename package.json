@@ -4,9 +4,6 @@
   "main": "index.js",
   "author": "jaylen.chan <jaylen.chan@hotmail.com>",
   "license": "MIT",
-  "bin": {
-    "tool": "core/cli/bin/index.js"
-  },
   "workspaces": [
     "core/*",
     "commands/*",

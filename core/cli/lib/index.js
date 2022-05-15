@@ -7,21 +7,27 @@ const pathExists = require('path-exists').sync
 const userHome = require('user-home')
 const minimist = require('minimist')
 const dotenv = require('dotenv')
+const commander = require('commander')
 const log = require('@tool-cli/log')
 const npm = require('@tool-cli/npm')
 const pkg = require('../package.json')
 const { LOWEST_NODE_VERSION, DEFAULT_CLI_HOME } = require('./const')
 
 class Cli {
+  constructor() {
+    this.program = new commander.Command()
+  }
+
   runCli() {
     try {
       this.checkPkgVersion()
       this.checkNodeVersion()
       this.checkRoot()
       this.checkUserHome()
-      this.checkInputArgs()
+      // this.checkInputArgs()
       this.checkEnv()
       this.checkGlobalUpdate()
+      this.registerCommand()
     } catch (e) {
       log.error(e.message)
     }
@@ -100,7 +106,7 @@ class Cli {
 
   async checkGlobalUpdate() {
     const { name: pkgName, version: pkgVersion } = pkg
-    const latestVersion = await npm.getNpmSemverVersions(pkgVersion, '@imooc-cli/core')
+    const latestVersion = await npm.getNpmSemverVersions(pkgVersion, pkgName)
 
     if (latestVersion && semver.gt(latestVersion, pkgVersion)) {
       log.warn(
@@ -131,6 +137,37 @@ class Cli {
     }
 
     process.env.CLI_HOME_PATH = defaultEnvConfig['cliHome']
+  }
+
+  registerCommand() {
+    this.program
+      .name(Reflect.ownKeys(pkg.bin)[0])
+      .usage('<command> [options]')
+      .version(pkg.version)
+      .option('-d, --debug', '是否开启调试模式', false)
+
+    this.program.on('option:debug', () => {
+      if (this.program.debug) {
+        process.env.LOG_LEVEL = 'verbose'
+      } else {
+        process.env.LOG_LEVEL = 'info'
+      }
+      log.level = process.env.LOG_LEVEL
+    })
+
+    this.program.on('command:*', (obj) => {
+      const availableCommands = this.program.commands.map((cmd) => cmd.name())
+      log.error(
+        colors.red(`未知的命令：${obj[0]}，可用的命令：${availableCommands.join(',')}`)
+      )
+    })
+
+    if (minimist(process.argv.slice(2))._.length === 0) {
+      this.program.outputHelp()
+      console.log()
+    }
+
+    this.program.parse(process.argv)
   }
 }
 

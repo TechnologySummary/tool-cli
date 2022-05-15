@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "main": "lib/index.js",
   "license": "MIT",
+  "bin": {
+    "tool": "bin/index.js"
+  },
   "dependencies": {
-    "@tool-cli/log": "file:../../../../utils/log",
-    "@tool-cli/get-npm-info": "file:../../../../utils/get-npm-info",
+    "@tool-cli/npm": "file:../../utils/npm",
+    "@tool-cli/log": "file:../../utils/log",
     "colors": "^1.4.0",
+    "commander": "^6.1.0",
     "dotenv": "^16.0.1",
     "minimist": "^1.2.5",
     "path-exists": "^4.0.0",
