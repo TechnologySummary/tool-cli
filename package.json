@@ -5,13 +5,17 @@
   "author": "jaylen.chan <jaylen.chan@hotmail.com>",
   "license": "MIT",
   "bin": {
-    "tool": "./bin/index.js"
+    "tool": "core/cli/bin/index.js"
   },
   "workspaces": [
-    "core",
-    "lib"
+    "core/*",
+    "commands/*",
+    "models/*",
+    "utils/*"
   ],
   "dependencies": {
-    "@tool-cli/core": "file: core"
+    "@tool-cli/cli": "file:core/cli",
+    "import-local": "^3.1.0",
+    "npmlog": "^6.0.2"
   }
 }

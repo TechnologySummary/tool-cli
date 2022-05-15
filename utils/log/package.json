@@ -1,0 +1,9 @@
+{
+  "name": "@tool-cli/log",
+  "version": "1.0.0",
+  "main": "./lib/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "npmlog": "^6.0.2"
+  }
+}
