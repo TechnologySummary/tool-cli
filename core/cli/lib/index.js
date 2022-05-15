@@ -10,6 +10,7 @@ const dotenv = require('dotenv')
 const commander = require('commander')
 const log = require('@tool-cli/log')
 const npm = require('@tool-cli/npm')
+const init = require('@tool-cli/init')
 const pkg = require('../package.json')
 const { LOWEST_NODE_VERSION, DEFAULT_CLI_HOME } = require('./const')
 
@@ -145,6 +146,12 @@ class Cli {
       .usage('<command> [options]')
       .version(pkg.version)
       .option('-d, --debug', '是否开启调试模式', false)
+
+    this.program
+      .command('init [projectName]')
+      .option('-f, --force', '是否强制初始化项目')
+      .action(init)
+      .description('初始化项目')
 
     this.program.on('option:debug', () => {
       if (this.program.debug) {

@@ -9,13 +9,17 @@
     "@tool-cli/log" "file:../../utils/log"
     "@tool-cli/npm" "file:../../utils/npm"
     "colors" "^1.4.0"
-    "commander" "^6.2.1"
+    "commander" "^6.1.0"
     "dotenv" "^16.0.1"
     "minimist" "^1.2.5"
     "path-exists" "^4.0.0"
     "root-check" "^1.0.0"
     "semver" "^7.3.7"
     "user-home" "^2.0.0"
+
+"@tool-cli/init@file:../../commands/init", "@tool-cli/init@file:/Users/jaylen/tool-cli/commands/init":
+  "resolved" "file:commands/init"
+  "version" "1.0.0"
 
 "@tool-cli/log@file:../../utils/log":
   "resolved" "file:utils/log"

@@ -9,6 +9,7 @@
   "dependencies": {
     "@tool-cli/npm": "file:../../utils/npm",
     "@tool-cli/log": "file:../../utils/log",
+    "@tool-cli/init": "file:../../commands/init",
     "colors": "^1.4.0",
     "commander": "^6.1.0",
     "dotenv": "^16.0.1",
