@@ -1,5 +1,6 @@
 const semver = require('semver')
 const colors = require('colors')
+const rootCheck = require('root-check')
 const log = require('@tool-cli/log')
 const pkg = require('../package.json')
 const { LOWEST_NODE_VERSION } = require('./const')
@@ -9,6 +10,7 @@ class Cli {
     try {
       this.checkPkgVersion()
       this.checkNodeVersion()
+      this.checkRoot()
     } catch (e) {
       log.error(e.message)
     }
@@ -26,6 +28,13 @@ class Cli {
     if (!semver.gte(curNodeVersion, LOWEST_NODE_VERSION)) {
       throw new Error(colors.red('当前node版本号低于tool-cli支持的最低node版本号'))
     }
+  }
+
+  checkRoot() {
+    rootCheck()
+    // root check后，再次输出用户uid
+    // 然后可以在命令行启动cli的时候使用sudo变换成root用户，发现确实降级成普通501用户而不是0root用户
+    // console.log(process.getuid())
   }
 }
 
