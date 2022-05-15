@@ -13,6 +13,7 @@
   - user-home：用户主目录
   - dotenv：环境变量
   - root-check：root启动检查
+  - minimist: 解析入参
 
 ## 准备阶段
 

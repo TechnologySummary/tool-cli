@@ -8,8 +8,10 @@
   dependencies:
     "@tool-cli/log" "file:../../../../utils/log"
     "colors" "^1.4.0"
+    "path-exists" "^4.0.0"
     "root-check" "^1.0.0"
     "semver" "^7.3.7"
+    "user-home" "^2.0.0"
 
 "@tool-cli/log@file:../../../../utils/log":
   "resolved" "file:utils/log"
@@ -180,6 +182,11 @@
   "version" "6.0.0"
   dependencies:
     "yallist" "^4.0.0"
+
+"minimist@^1.2.5":
+  "integrity" "sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw=="
+  "resolved" "https://registry.npmjs.org/minimist/-/minimist-1.2.5.tgz"
+  "version" "1.2.5"
 
 "npmlog@^6.0.2":
   "integrity" "sha512-/vBvz5Jfr9dT/aFWd0FIRf+T/Q2WBsLENygUaFUqstqsycmZAP/t5BvFJTK0viFmSUxiUKTUplWy5vt+rvKIxg=="
