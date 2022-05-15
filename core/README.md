@@ -11,7 +11,7 @@
   - semver：版本比对
   - colors：提供不同颜色的文本
   - user-home：用户主目录
-  - dotenv：环境变量
+  - dotenv：检查环境变量
   - root-check：root启动检查
   - minimist: 解析入参
 

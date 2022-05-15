@@ -1,12 +1,15 @@
+const path = require('path')
+const fs = require('fs')
 const semver = require('semver')
 const colors = require('colors')
 const rootCheck = require('root-check')
 const pathExists = require('path-exists').sync
 const userHome = require('user-home')
 const minimist = require('minimist')
+const dotenv = require('dotenv')
 const log = require('@tool-cli/log')
 const pkg = require('../package.json')
-const { LOWEST_NODE_VERSION } = require('./const')
+const { LOWEST_NODE_VERSION, DEFAULT_CLI_HOME } = require('./const')
 
 class Cli {
   runCli() {
@@ -16,6 +19,7 @@ class Cli {
       this.checkRoot()
       this.checkUserHome()
       this.checkInputArgs()
+      this.checkEnv()
     } catch (e) {
       log.error(e.message)
     }
@@ -69,6 +73,50 @@ class Cli {
 
     log.level = process.env.LOG_LEVEL
     log.verbose('debug', 'test debug')
+  }
+
+  checkEnv() {
+    const dotenvPath = path.resolve(userHome, '.env')
+    if (!pathExists(dotenvPath)) {
+      this.createFile(dotenvPath)
+    }
+    /**
+     * 通过dotenv配合我们自定义的.env，会将我们在.env中写的环境变量注入的process.env当中
+     * 之后我们就可以使用process.env.环境变量进行一系列操作
+     */
+    dotenv.config({
+      // 将环境变量的文件路径设置在用户主目录下 - /Users/jaylen/.env
+      path: dotenvPath
+    })
+    this.createDefaultEnv()
+    /**
+     * 虽然我们想要在debug模式下能够输出verbose指定的内容
+     * 但是对于process.env.CLI_HOME，假如脚手架的使用者没有在.env中指定这个CLI_HOME，那么输出就是undefined
+     * 因此，我们需要给这个地方添加默认的环境变量，防止用户没配置这个环境变量就直接拿来使用
+     */
+    log.verbose('环境变量', process.env.CLI_HOME_PATH)
+  }
+
+  createFile(filePath) {
+    fs.writeFileSync(filePath, '', (err) => {
+      if (err) {
+        throw new Error(colors.red(`${filePath}创建失败！`))
+      }
+    })
+  }
+
+  createDefaultEnv() {
+    const defaultEnvConfig = {
+      home: userHome
+    }
+
+    if (process.env.CLI_HOME) {
+      defaultEnvConfig['cliHome'] = path.join(userHome, process.env.CLI_HOME)
+    } else {
+      defaultEnvConfig['cliHome'] = path.join(userHome, DEFAULT_CLI_HOME)
+    }
+
+    process.env.CLI_HOME_PATH = defaultEnvConfig['cliHome']
   }
 }
 
