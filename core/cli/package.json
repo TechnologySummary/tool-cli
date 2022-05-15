@@ -6,7 +6,9 @@
   "dependencies": {
     "@tool-cli/log": "file:../../../../utils/log",
     "colors": "^1.4.0",
+    "path-exists": "^4.0.0",
+    "root-check": "^1.0.0",
     "semver": "^7.3.7",
-    "root-check": "^1.0.0"
+    "user-home": "^2.0.0"
   }
 }
