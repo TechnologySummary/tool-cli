@@ -6,6 +6,8 @@
   "resolved" "file:core/cli"
   "version" "1.0.0"
   dependencies:
+    "@tool-cli/exec" "file:../exec"
+    "@tool-cli/init" "file:../../commands/init"
     "@tool-cli/log" "file:../../utils/log"
     "@tool-cli/npm" "file:../../utils/npm"
     "colors" "^1.4.0"
@@ -16,6 +18,12 @@
     "root-check" "^1.0.0"
     "semver" "^7.3.7"
     "user-home" "^2.0.0"
+
+"@tool-cli/exec@file:../exec", "@tool-cli/exec@file:/Users/jaylen/tool-cli/core/exec":
+  "resolved" "file:core/exec"
+  "version" "1.0.0"
+  dependencies:
+    "@tool-cli/package" "file:../../models/package"
 
 "@tool-cli/init@file:../../commands/init", "@tool-cli/init@file:/Users/jaylen/tool-cli/commands/init":
   "resolved" "file:commands/init"
@@ -50,6 +58,10 @@
     "colors" "^1.4.0"
     "semver" "^7.3.7"
     "url-join" "^4.0.1"
+
+"@tool-cli/package@file:../../models/package", "@tool-cli/package@file:/Users/jaylen/tool-cli/models/package":
+  "resolved" "file:models/package"
+  "version" "1.0.0"
 
 "ansi-regex@^2.0.0":
   "integrity" "sha1-w7M6te42DYbg5ijwRorn7yfWVN8="

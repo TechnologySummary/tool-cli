@@ -1,0 +1,9 @@
+{
+  "name": "@tool-cli/exec",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@tool-cli/package": "file:../../models/package"
+  }
+}
